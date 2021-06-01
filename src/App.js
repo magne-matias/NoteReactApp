@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 
+import Note from './Note/Note';
+
 class App extends Component{
 
 //para guardar notas en el estado vamos a iniciar el constructor
@@ -28,10 +30,14 @@ class App extends Component{
             {//las llaves son para interpretar js
               this.state.notes.map(note => {//desde el estado de la app quiero las notas y recorrerlas atraves del map
                 return(
-                  <li key={note.noteId}>{note.noteContent}</li>//key=para que cada item sea unico.  
-                )
+                  <Note 
+                  noteContent={note.noteContent}
+                  noteId={note.noteId}
+                  key={note.noteId}
+                  />
+                  )
               }) 
-            }
+            }//20,13
           </div>
         </ul>
 
