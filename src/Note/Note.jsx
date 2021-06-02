@@ -8,10 +8,18 @@ class Note extends Component{
         this.noteContent=props.noteContent;
     }
 
+    handleRemove(id){
+        alert('remove:',id)
+    }
+
     render(){
         return(
         <div className="Note">
-            <li>{this.noteId} - {this.noteContent} </li>
+            <span onClick={()=> this.handleRemove(this.noteId)} >{/*evento para cerrar la nota*/}
+            &times;</span>{/*lo separamos de esta manera para qu tenga estilo propio*/}
+            
+            <p>{this.noteContent}</p>
+            
         </div>
         )
     }

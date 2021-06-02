@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 
 import Note from './Note/Note';
+import NoteForm from './NoteForm/NoteForm';
 
 class App extends Component{
 
@@ -14,6 +15,10 @@ class App extends Component{
         {noteId: 2, noteContent: 'note 2'}
       ]
     }
+  }
+
+  removeNote(){//
+
   }
 
 
@@ -37,7 +42,7 @@ class App extends Component{
                   />
                   )
               }) 
-            }//20,13
+            }
           </div>
         </ul>
 
