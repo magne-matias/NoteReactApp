@@ -15,12 +15,22 @@ class App extends Component{
         {noteId: 2, noteContent: 'note 2'}
       ]
     }
+      this.addNote=this.addNote.blind(this);//para el scope
   }
 
   removeNote(){//
 
   }
+  //APP.js s encarga de almacenarlo y eliminarlo ya que posee los datos(note:[{noteID,etc}])
 
+  addNote(note){// se encarga de almacenar los datos en el constructor
+    let {notes} = this.state;
+    note.push({//me permite insertar datos
+      noteId: notes.legth +1,//ya que es un arreglo usamos legth y el +1 es para crear de cierta manera un nuevp id
+      noteContent: note
+    });
+    this.setState({notes});
+  }
 
   render() {
     return (
@@ -46,8 +56,8 @@ class App extends Component{
           </div>
         </ul>
 
-        <div className="notesfooter">
-
+        <div className="notesFooter">
+            <NoteForm addNote={this.addNote} />
         </div>
       </div>
     );
