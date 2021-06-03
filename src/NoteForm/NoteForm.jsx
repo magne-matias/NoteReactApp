@@ -8,7 +8,9 @@ class NoteForm extends Component{
     }
 
     addNote(){//evento para el boton
-    this.props.addNote(this.textInput.value)
+    this.props.addNote(this.textInput.value);
+    this.textInput.value='';
+    this.textInput.focus();
     }
 
 
