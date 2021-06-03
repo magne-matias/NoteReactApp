@@ -9,7 +9,12 @@ class Note extends Component{
     }
 
     handleRemove(id){
-        alert('remove:',id)
+        
+        const response= window.confirm ('estas seguro que quieres eliminarlo?')
+        if(response){
+            this.props.removeNote(id);
+        }
+        return;
     }
 
     render(){

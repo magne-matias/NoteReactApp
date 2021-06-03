@@ -8,7 +8,7 @@ import firebase from 'firebase';
 import {DB_CONFIG}  from './config/config';
 import 'firebase/database'
 
-firebase.app();
+
 
 class App extends Component{
 
@@ -24,6 +24,7 @@ class App extends Component{
       this.app=firebase.initializeApp(DB_CONFIG);
       this.db=this.app.database().ref().child('notes')//conexion con la base de datos
       this.addNote = this.addNote.blind(this);//para el scope
+      this.remove=this.remove.blind(this);
   }
 
   //CICLO DE VIDA
@@ -36,10 +37,18 @@ class App extends Component{
       })
       this.setState({notes});
     });
+    this.db.on('child_removed', snap=>{
+      for (let i=0; i<notes.length; i++){
+        if (notes[i].noteId === snap.key){
+          notes.splice(i,1);
+        }
+      }
+      this.setState({notes});
+    });
   }
 
-  removeNote(){//
-
+  removeNote(noteId){//
+    this.db.child(noteId).remove();
   }
   //APP.js s encarga de almacenarlo y eliminarlo ya que posee los datos(note:[{noteID,etc}])
 
@@ -70,6 +79,7 @@ class App extends Component{
                   noteContent={note.noteContent}
                   noteId={note.noteId}
                   key={note.noteId}
+                  removeNote={this.removeNote}
                   />
                   )
               }) 
